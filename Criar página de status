@@ -1,0 +1,62 @@
+index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Status</title>
+<style>
+body {
+  background:#0f1117;
+  color:#e5e7eb;
+  font-family: Arial, sans-serif;
+}
+.container {
+  max-width: 700px;
+  margin: 50px auto;
+}
+.card {
+  background:#161b22;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:15px;
+  display:flex;
+  justify-content:space-between;
+}
+.online { color:#22c55e; }
+.offline { color:#ef4444; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Status dos Serviços</h2>
+
+  <div class="card">
+    <span>Site Principal</span>
+    <span id="site" class="offline">Verificando...</span>
+  </div>
+
+  <div class="card">
+    <span>API</span>
+    <span id="api" class="offline">Verificando...</span>
+  </div>
+</div>
+
+<script>
+async function check(id, url) {
+  try {
+    await fetch(url, { mode: "no-cors" });
+    document.getElementById(id).innerHTML = "Online";
+    document.getElementById(id).className = "online";
+  } catch {
+    document.getElementById(id).innerHTML = "Offline";
+    document.getElementById(id).className = "offline";
+  }
+}
+
+check("site", "https://google.com");
+check("api", "https://api.github.com");
+</script>
+
+</body>
+</html>
